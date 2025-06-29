@@ -7,7 +7,22 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFaceHub
 from langchain.chains import RetrievalQA
+import streamlit as st
+# from rag import load_retriever_chain  # adjust if module name is different
 
+
+def main():
+    st.title("📄 RAG Chatbot using LangChain")
+    user_question = st.text_input("Ask a question based on your documents:")
+    
+    if user_question:
+        # Use qa_chain defined below for answering questions
+        response = qa_chain.invoke({"query": user_question})
+        st.write("### 📌 Answer:")
+        st.write(response['result'])
+
+if __name__ == "__main__":
+    main()
 # 📥 Load environment variables
 load_dotenv()
 hf_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
